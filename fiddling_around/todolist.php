@@ -1,6 +1,3 @@
-<?php
-session_start();
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,17 +31,17 @@ if (!isset($_POST['usrname']))
 	$query = sprintf("SELECT * FROM %s", $mysqltable);
 	$result = mysql_query($query);
 	if ($result) {
-//		while ($row = mysql_fetch_array($result, MYSQL_ASSOC)) {
-		while ($row[] = mysql_fetch_array($result, MYSQL_ASSOC)) {
-		}
+		$row = mysql_fetch_array($result, MYSQL_ASSOC);
+		echo $row[text];
+		/*
 		echo "<ul>";
 		foreach($row as $item => $txt) {
 			echo "<li>" . $txt . "</li>";
 		}
 		echo "</ul>";
+		 */
 		print_r($row);
 	}
-
 
 	echo "Hello " . $user;
 
