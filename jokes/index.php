@@ -24,7 +24,7 @@ catch (PDOException $e)
 	exit();
 }
 
-while ($row = $result->fetch())
+foreach ($result as $row)
 {
 	$jokes[] = $row['joketext'];
 }
