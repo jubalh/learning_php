@@ -13,5 +13,6 @@
 			</p>
 		</blockquote>
 	<?php endforeach; ?>
+	<p><a href="?addjoke">Add your own joke</a></p>
 </body>
 </html>
