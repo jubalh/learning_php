@@ -21,7 +21,6 @@ catch (PDOException $e)
 
 if (isset($_POST['joketext']))
 {
-	echo "hey";
 	try
 	{
 		$query = 'INSERT INTO joke SET joketext = :joketext, jokedate = CURDATE()';
