@@ -1,5 +1,4 @@
 <?php
-
 if (isset($_GET['addjoke']))
 {
 	include 'form.html.php';
@@ -35,13 +34,33 @@ if (isset($_POST['joketext']))
 		exit();
 	}
 
-	header('Location: .');
+	header('Refresh: 0');
+	exit();
+}
+
+if (isset($_GET['deletejoke']))
+{
+	try
+	{
+		$query = 'DELETE FROM joke where id = :id';
+		$s = $pdo->prepare($query);
+		$s->bindValue(':id', $_POST['id']);
+		$s->execute();
+	}
+	catch(PDOException $e)
+	{
+		$error = 'Error delete joke: ' . $e->getMessage();
+		include 'error.html.php';
+		exit();
+	}
+
+	header('Location: .'); // is this okay?
 	exit();
 }
 
 try
 {
-	$query = 'SELECT joketext FROM joke';
+	$query = 'SELECT joketext, id FROM joke';
 	$result = $pdo->query($query);
 }
 catch (PDOException $e)
@@ -53,7 +72,7 @@ catch (PDOException $e)
 
 foreach ($result as $row)
 {
-	$jokes[] = $row['joketext'];
+	$jokes[] = array('id' => $row['id'], 'text' => $row['joketext']);
 }
 
 include 'jokes.html.php';
